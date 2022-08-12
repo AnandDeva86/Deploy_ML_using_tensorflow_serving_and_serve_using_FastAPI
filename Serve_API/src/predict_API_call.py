@@ -23,7 +23,7 @@ class PredictAPI:
                                    ,Acceleration:float,Model_Year:int
                                    ,Europe:int,Japan:int
                                    ,USA:int) -> requests.models.Response:
-
+        """ It handles individual car parameters and create a dict out of it """
         instance = {"instances": [[Cylinders,Displacement,Horsepower
                                     ,Weight,Acceleration,Model_Year
                                     ,Europe,Japan,USA]]}
@@ -32,6 +32,7 @@ class PredictAPI:
 
 
     def predict_multiple_input(self, cars: list[CarModel]) -> requests.models.Response:
+        """ It handles a list of CarModels and create a dict out of it """
         final_lst = []
         for car in cars:
             lst = [car.Cylinders,car.Displacement,
@@ -39,6 +40,6 @@ class PredictAPI:
                    car.Acceleration,car.Model_Year,
                    car.Europe,car.Japan,car.USA]
             final_lst.append(lst)
-
+        # create a dict
         instance = {"instances": final_lst}
         return do_prediction(self.url,instance)

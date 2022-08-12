@@ -5,6 +5,8 @@ from Serve_API.src.Models import CarModel
 from Serve_API.src.predict_API_call import PredictAPI
 
 
+__author__ = 'Anand Devarajan'
+
 class TestApiCall(unittest.TestCase):
 
     @classmethod
@@ -14,6 +16,7 @@ class TestApiCall(unittest.TestCase):
 
     @patch('Serve_API.src.predict_API_call.do_prediction')
     def test_success_single_input(self, mock_do_prediction):
+        """ It tests the Successful execution of the predict_single_input method"""
         dummy_json = {'predictions': [[15.8185673]]}
         mock_value = MagicMock()
         mock_value.return_value = dummy_json
@@ -24,6 +27,7 @@ class TestApiCall(unittest.TestCase):
 
     @patch('Serve_API.src.predict_API_call.do_prediction')
     def test_success_multiple_input(self, mock_do_prediction):
+        """ It tests the Successful execution of the test_success_multiple_input method"""
         dummy_json = {'predictions': [[15.8185673], [15.8185673]]}
         car = CarModel(Cylinders=8,Displacement=390.0,Horsepower=190,
                        Weight=3850.0,Acceleration=8.5,Model_Year=70,

@@ -8,6 +8,7 @@ logging.basicConfig(format='%(asctime)s %(message)s', datefmt='%m/%d/%Y %I:%M:%S
 
 
 def do_prediction(url:str, data:Dict[str,List]) -> requests.models.Response:
+    """ It performs the post request to the served model with the input parameters"""
     if data:
         data_json = json.dumps(data)
         headers = {"content-type": "application/json"}
@@ -16,7 +17,6 @@ def do_prediction(url:str, data:Dict[str,List]) -> requests.models.Response:
 
         except requests.exceptions.Timeout:
             return None
-
         else:
             if response.ok:
                 return response

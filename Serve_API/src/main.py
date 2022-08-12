@@ -14,8 +14,7 @@ from .Models import CarModel
 # File name: main.py
 # Author: Anand Devarajan
 # Date created: 07/08/2022
-# Date last modified: 07/08/2022
-# Python Version: >3.9
+# Python Version: > 3.9
 # -----------------------------------------------------------
 
 
@@ -24,6 +23,7 @@ API_call = PredictAPI()
 
 @app.get('/')
 async def index():
+    """It is the home page"""
     intro_str = {"Hi there": "This API is used to consume and then serve predictions from the served model"}
     return intro_str
 
@@ -34,7 +34,7 @@ async def predict_single(Cylinders:int,Displacement:float
                                    ,Acceleration:float,Model_Year:int
                                    ,Europe:int,Japan:int
                                    ,USA:int) -> JSONResponse:
-
+    """It performs get request"""
     prediction = API_call.predict_single_input(Cylinders,Displacement
                                   ,Horsepower,Weight
                                   ,Acceleration,Model_Year
@@ -50,6 +50,7 @@ async def predict_single(Cylinders:int,Displacement:float
 
 @app.post('/predict_multiple/')
 async def predict_multiple(cars: List[CarModel]) -> JSONResponse:
+    """It performs post request with list of CarModel """
     if cars is None:
         raise HTTPException(status_code=400,
                             detail="Please provide an valid data when calling this request.")

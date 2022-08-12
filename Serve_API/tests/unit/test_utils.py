@@ -4,6 +4,7 @@ import requests
 
 from Serve_API.src.utils import do_prediction
 
+__author__ = 'Anand Devarajan'
 
 class TestUtils(unittest.TestCase):
     @classmethod
@@ -14,7 +15,7 @@ class TestUtils(unittest.TestCase):
 
     @patch('Serve_API.src.utils.requests.post')
     def test_success(self, mock_object):
-
+        """ It tests the Successful execution of the do_prediction function"""
         mock_value = MagicMock()
         mock_value.status_code = 200
         mock_value.json.return_value = self.instance
@@ -25,7 +26,7 @@ class TestUtils(unittest.TestCase):
 
     @patch('Serve_API.src.utils.requests.post')
     def test_failure(self, mock_object):
-
+        """ It tests the failure execution of the do_prediction function"""
         mock_value = MagicMock(status_code = 404)
         mock_value.json.return_value = self.instance
         mock_object.return_value = mock_value
@@ -35,6 +36,7 @@ class TestUtils(unittest.TestCase):
 
     @patch('Serve_API.src.utils.requests.post')
     def test_timeout_exception(self, mock_object):
+        """ It tests the exception handling of the do_prediction function"""
         mock_object.side_effect = requests.exceptions.Timeout('Server timed out')
         do = do_prediction(self.url, self.instance)
         self.assertEqual(do, None)

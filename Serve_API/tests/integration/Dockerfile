@@ -23,4 +23,4 @@ RUN curl -sS -o - https://dl-ssl.google.com/linux/linux_signing_key.pub | apt-ke
     apt-get -yqq install google-chrome-stable && \
     rm -rf /var/lib/apt/lists/*
 
-# CMD ["python", "/integration/test_main.py"]
+# CMD ["python", "/integration/integrate_test.py"]
