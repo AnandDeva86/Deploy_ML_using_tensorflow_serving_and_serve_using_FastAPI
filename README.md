@@ -25,7 +25,7 @@ A fastAPI that consume and then serve predictions from the served model deployed
 * Locust
 
 
-### Executing program
+### Deployment Instruction
 
 * Build the docker-compose.yml
 

@@ -14,7 +14,7 @@ from .Models import CarModel
 # File name: main.py
 # Author: Anand Devarajan
 # Date created: 07/08/2022
-# Python Version: > 3.9
+# Python Version: >= 3.9
 # -----------------------------------------------------------
 
 
@@ -50,7 +50,7 @@ async def predict_single(Cylinders:int,Displacement:float
 
 @app.post('/predict_multiple/')
 async def predict_multiple(cars: List[CarModel]) -> JSONResponse:
-    """It performs post request with list of CarModel """
+    """It performs post request with list of CarModels """
     if cars is None:
         raise HTTPException(status_code=400,
                             detail="Please provide an valid data when calling this request.")
