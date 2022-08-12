@@ -1,0 +1,49 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  annotations:
+    kompose.cmd: kompose convert
+    kompose.version: 1.26.0 (40646f47)
+  creationTimestamp: null
+  labels:
+    io.kompose.service: tensorflow-serving
+  name: tensorflow-serving
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      io.kompose.service: tensorflow-serving
+  strategy:
+    type: Recreate
+  template:
+    metadata:
+      annotations:
+        kompose.cmd: kompose convert
+        kompose.version: 1.26.0 (40646f47)
+      creationTimestamp: null
+      labels:
+        io.kompose.service: tensorflow-serving
+    spec:
+      containers:
+        - args:
+            - --model_config_file=/models/models.config
+          image: tensorflow/serving
+          name: model-deploy
+          ports:
+            - containerPort: 8500
+            - containerPort: 8501
+          resources: {}
+          volumeMounts:
+            - mountPath: /models/dnn_model
+              name: tensorflow-serving-claim0
+            - mountPath: /models/models.config
+              name: tensorflow-serving-claim1
+      restartPolicy: Always
+      volumes:
+        - name: tensorflow-serving-claim0
+          persistentVolumeClaim:
+            claimName: tensorflow-serving-claim0
+        - name: tensorflow-serving-claim1
+          persistentVolumeClaim:
+            claimName: tensorflow-serving-claim1
+status: {}

@@ -1,0 +1,28 @@
+version: '3.3'
+
+
+services:
+  tensorflow-serving:
+    container_name: model-deploy
+    image: tensorflow/serving
+    ports:
+      - '8500:8500'
+      - '8501:8501'
+    volumes:
+      - type: bind
+        source: ./deploy_model/models/dnn_model
+        target: /models/dnn_model
+      - type: bind
+        source: ./deploy_model/models/models.config
+        target: /models/models.config
+    command:
+      - '--model_config_file=/models/models.config'
+  api:
+    container_name: api_service
+    build:
+      context: ./Serve_API
+      dockerfile: Dockerfile
+    ports:
+      - '8000:8000'
+    command: uvicorn src.main:app --host 0.0.0.0 --port 8000
+
