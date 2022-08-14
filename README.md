@@ -30,12 +30,12 @@ A fastAPI that consume and then serve predictions from the served model deployed
 * Build the docker-compose.yml
 
 ```
-docker-compose up --build
+docker-compose up -d --build
 
 ```
 
 * The application runs on the [local host](http://127.0.0.1:8000/docs).
-* Pass the required parameters in the swagger ui get or post response body.
+* Pass the required parameters(Cylinders, Displacement, Horsepower, Weight, Acceleration, Model Year, Europe, Japan, USA) in the swagger ui get or post response body.
 * Stop the containers using
 
 ```

@@ -19,7 +19,7 @@ from .Models import CarModel
 
 
 app = FastAPI(debug=True)
-API_call = PredictAPI()
+
 
 @app.get('/')
 async def index():
@@ -35,6 +35,8 @@ async def predict_single(Cylinders:int,Displacement:float
                                    ,Europe:int,Japan:int
                                    ,USA:int) -> JSONResponse:
     """It performs get request"""
+    API_call = PredictAPI()
+
     prediction = API_call.predict_single_input(Cylinders,Displacement
                                   ,Horsepower,Weight
                                   ,Acceleration,Model_Year
@@ -55,6 +57,7 @@ async def predict_multiple(cars: List[CarModel]) -> JSONResponse:
         raise HTTPException(status_code=400,
                             detail="Please provide an valid data when calling this request.")
 
+    API_call = PredictAPI()
     prediction = API_call.predict_multiple_input(cars)
 
     if prediction:
